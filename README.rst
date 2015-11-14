@@ -11,7 +11,7 @@ root of the playbooks directory::
 
     mkdir library
     touch library/__init__.py
-    git submodule add https:/www.shore.co.il/cgit/ansible-modules library/shore
+    git submodule add https://www.shore.co.il/cgit/ansible-modules library/shore
 
 To update the submodule ::
 
