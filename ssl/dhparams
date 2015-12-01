@@ -3,7 +3,7 @@
 
 fail ()
 {
-    echo "{\"failed\": true, \"msg\": \"$1\"}"
+    echo "{\"failed\": true, \"msg\": \"$1\" \"bits\": 0}"
     exit
 }
 
