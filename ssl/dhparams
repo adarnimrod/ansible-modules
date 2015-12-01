@@ -22,4 +22,4 @@ fi
 bits="$(openssl dhparam -in $path -text -noout \
     | sed -n 's/Diffie-Hellman-Parameters: (\([0-9]*\) bit)/\1/p')"
 
-echo "{ \"changed\": False, \"bits\": \"$bits\" }"
+echo "{ \"changed\": False, \"bits\": $bits }"
