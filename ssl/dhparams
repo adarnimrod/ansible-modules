@@ -22,4 +22,4 @@ fi
 bits="$(openssl dhparam -in $path -text -noout \
     | sed -n 's/[a-zA-Z#0-9 \-]*Parameters: (\([0-9]*\) bit)/\1/p')"
 
-echo "{ \"changed\": False, \"path\": \"$path\", \"bits\": $bits }"
+echo "{ \"changed\": false, \"path\": \"$path\", \"bits\": $bits }"
