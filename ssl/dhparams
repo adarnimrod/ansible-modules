@@ -1,2 +1,25 @@
 #!/bin/sh -e
+. "$1"
 
+if [ -z "$path" ]
+then
+    echo "failed=True msg=Path not set."
+    exit
+fi
+
+if [ ! -r $path ]
+then
+    echo "failed=True msg=Can\'t access path."
+    exit
+fi
+
+if [ ! -f $path ]
+then
+    echo "failed=True msg=Path doesn't exist or is not a file."
+    exit
+fi
+
+bits="$(openssl dhparam -in $path -text -noout \
+    | sed -n 's/Diffie-Hellman-Parameters: (\([0-9]*\) bit)/\1/p')"
+
+echo "{ \"changed\": False, \"bits\": \"$bits\" }"
