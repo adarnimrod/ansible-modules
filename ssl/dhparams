@@ -1,23 +1,15 @@
 #!/bin/sh -e
 . "$1"
 
-if [ -z "$path" ]
-then
-    echo "failed=True msg=Path not set."
+fail ()
+{
+    echo "{\"failed\": true, \"msg\": \"$1\"}"
     exit
-fi
+}
 
-if [ ! -r $path ]
-then
-    echo "failed=True msg=Can\'t access path."
-    exit
-fi
-
-if [ ! -f $path ]
-then
-    echo "failed=True msg=Path doesn't exist or is not a file."
-    exit
-fi
+test -z "$path" && fail "Parameter 'path' is not set."
+test ! -r "$path" && fail "Can't access 'path'."
+test ! -f "$path" && fail "Parameter 'path' doesn't exists or is not a file."
 
 bits="$(openssl dhparam -in $path -text -noout \
     | sed -n 's/[a-zA-Z#0-9 \-]*Parameters: (\([0-9]*\) bit)/\1/p')"
