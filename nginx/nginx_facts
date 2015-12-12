@@ -1,0 +1,12 @@
+#!/bin/sh -e
+. "$1"
+
+fail ()
+{
+    echo "{\"failed\": true, \"msg\": \"$1\"}"
+    exit
+}
+
+which nginx || fail "Can't find nginx executable."
+
+nginx -v 2>&1 | sed 's/[a-zA-Z :\/]*\([0-9]*\)\.\([0-9]*\)\.\([0-9]\)*/{"changed": false, "ansible_facts": {"nginx": {"major":\1, "minor":\2, "patch":\3}}}/g'
