@@ -6,18 +6,22 @@ A repository of Ansible modules.
 Installation
 ------------
 
-To use these modules, add a git submodule under the ``library`` directory at the
-root of the playbooks directory::
+To use these modules, add a git submodule under the :code:`library` directory
+at the root of the playbooks directory
+
+.. code:: shell
 
     mkdir library
     touch library/__init__.py
     git submodule add https://www.shore.co.il/cgit/ansible-modules library/shore
 
-To update the submodule ::
+To update the submodule
+
+.. code:: shell
 
     git submodule update --remote library/shore
 
-Remember to commit ``.gitmodules``!
+Remember to commit :code:`.gitmodules`!
 
 Modules
 -------
