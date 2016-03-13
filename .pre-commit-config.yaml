@@ -1,5 +1,5 @@
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: cf550fcab3f12015f8676b8278b30e1a5bc10e70
+    sha: 97b88d9610bcc03982ddac33caba98bb2b751f5f
     hooks:
     -   id: check-added-large-files
     -   id: check-json
@@ -7,3 +7,8 @@
     -   id: check-yaml
     -   id: check-merge-conflict
     -   id: flake8
+-   repo: https://www.shore.co.il/git/shell-pre-commit
+    sha: e48c7fbdadf14a548dcbda32895b67f90fa0f12b
+    hooks:
+    -   id: shell-lint
+        files: collectd/collectd_facts|nginx/nginx_facts|ssl/dhparams
