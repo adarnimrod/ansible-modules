@@ -9,4 +9,4 @@ fail ()
 
 which nginx || fail "Can't find nginx executable."
 
-nginx -v 2>&1 | sed -n 's/[a-zA-Z :\/]*\([0-9]*\)\.\([0-9]*\)\.\([0-9]\)*/{"changed": false, "ansible_facts": {"nginx": {"major":\1, "minor":\2, "patch":\3}}}/gp'
+nginx -v 2>&1 | sed -n 's/[a-zA-Z :\/]*\([0-9]*\)\.\([0-9]*\)\.\([0-9]\)*/{"changed": false, "ansible_facts": {"nginx": {"major":\1, "minor":\2, "patch":\3 "version":\1.\2.\3}}}/gp'
