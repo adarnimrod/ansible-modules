@@ -18,7 +18,7 @@ install:
   - pip install pre_commit ansible | cat
 
 before_script:
-  - docker run --name $(echo $DOCKER | sed 's/:/_/g') $DOCKER
+  - docker run --detach --name $(echo $DOCKER | sed 's/:/_/g') $DOCKER tail -f /.dockerenv
 
 script:
   - pre-commit run --all-files
