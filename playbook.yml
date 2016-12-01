@@ -49,11 +49,11 @@
   - name: Assertions
     assert:
       that:
-      - nginx_facts is defined
-      - version in nginx_facts
-      - major in nginx_facts
-      - nginx_facts.major is number
-      - nginx_facts.changed == False
+      - nginx_facts|changed == False
+      - nginx.major is number
+      - nginx.minor is number
+      - nginx.patch is number
+      - nginx.version is defined
 
   - name: DH params for missing file
     ignore_errors: True
