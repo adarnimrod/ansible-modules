@@ -15,7 +15,7 @@ env:
   - DOCKER=debian:jessie
 
 install:
-  - pip install pre_commit ansible
+  - pip install pre_commit ansible | cat
 
 before_script:
   - docker run --name $(echo $DOCKER | sed 's/:/_/g') $DOCKER
