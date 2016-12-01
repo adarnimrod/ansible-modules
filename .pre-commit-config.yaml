@@ -2,13 +2,20 @@
     sha: 97b88d9610bcc03982ddac33caba98bb2b751f5f
     hooks:
     -   id: check-added-large-files
-    -   id: check-json
-    -   id: check-xml
     -   id: check-yaml
     -   id: check-merge-conflict
     -   id: flake8
 -   repo: https://github.com/adarnimrod/shell-pre-commit
-    sha: e48c7fbdadf14a548dcbda32895b67f90fa0f12b
+    sha: v0.1.0
     hooks:
     -   id: shell-lint
         files: collectd/collectd_facts|nginx/nginx_facts|ssl/dhparams
+-   repo: https://github.com/adarnimrod/ansible-pre-commit.git
+    sha: v0.4.0
+    hooks:
+    -   id: ansible-syntax-check
+-   repo: https://github.com/willthames/ansible-lint
+    sha: 959ab0f525e9abb19cf75f34381015cf33695f61
+    hooks:
+    -   id: ansible-lint
+        files: playbook.yml
