@@ -1,6 +1,9 @@
 ansible-modules
 ###############
 
+.. image:: https://travis-ci.org/adarnimrod/ansible-modules.svg?branch=master
+    :target: https://travis-ci.org/adarnimrod/ansible-modules
+
 A repository of Ansible modules.
 
 Installation
