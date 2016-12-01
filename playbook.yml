@@ -32,13 +32,10 @@
   - name: Assertions
     assert:
       that:
-      - collectd_facts is defined
-      - changed in collectd_facts
-      - collectd_facts.changed == False
-      - ansible_facts in collectd_facts
-      - collectd is defined
-      - major in collectd
+      - collectd_facts|changed == False
       - collectd.major is number
+      - collectd.minor is number
+      - collectd.patch is number
 
   - name: Nginx facts
     nginx_facts:
