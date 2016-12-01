@@ -69,13 +69,9 @@
   - name: Assertions
     assert:
       that:
-      - missing_dhparams is defined
-      - bits in missing_dhparams
       - missing_dhparams.bits == 0
-      - failed in missing_dhparams
-      - missing_dhparams.failed == True
-      - path in missing_dhparams
-      - missing_dhparams.path == '/etc/ssl/dhparams.pem'
+      - missing_dhparams|failed == True
+      - missing_dhparams|changed == False
 
   - name: Generate DH params
     command: openssl dhparam -out /etc/ssl/dhparams.pem 2048
@@ -94,10 +90,7 @@
   - name: Assertions
     assert:
       that:
-      - existing_dhparams is defined
-      - bits in existing_dhparams
       - existing_dhparams.bits == 2048
-      - failed in existing_dhparams
-      - existing_dhparams.failed == False
-      - path in existing_dhparams
+      - existing_dhparams|failed == False
+      - existing_dhparams|changed == False
       - existing_dhparams.path == '/etc/ssl/dhparams.pem'
