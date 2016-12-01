@@ -37,6 +37,7 @@
       - collectd_facts is defined
       - changed in collectd_facts
       - collectd_facts.changed == False
+      - ansible_facts in collectd_facts
       - collectd is defined
       - major in collectd
       - collectd.major is number
