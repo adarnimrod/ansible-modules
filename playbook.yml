@@ -16,11 +16,9 @@
 
   - name: APT install
     apt:
-      name:
-      - collectd
-      - nginx
-      - openssl
+      name: ['nginx-light', 'collectd-core', 'openssl']
       state: present
+      install_recommends: no
 
   - name: Collectd facts
     collectd_facts:
