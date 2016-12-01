@@ -11,6 +11,9 @@
     register: debian_bootstrap_install_python
     changed_when: "'Unpacking' in debian_bootstrap_install_python.stdout"
 
+  - name: Gather facts
+    setup:
+
   - name: APT install
     apt:
       name:
@@ -23,6 +26,11 @@
     collectd_facts:
     register: collectd_facts
 
+  - name: Debug
+    debug:
+      var: collectd_facts
+      verbosity: 2
+
   - name: Assertions
     assert:
       that:
@@ -34,6 +42,11 @@
   - name: Nginx facts
     nginx_facts:
     register: nginx_facts
+
+  - name: Debug
+    debug:
+      var: nginx_facts
+      verbosity: 2
 
   - name: Assertions
     assert:
@@ -49,6 +62,11 @@
     dhparams:
       path: /etc/ssl/dhparams.pem
     register: missing_dhparams
+
+  - name: Debug
+    debug:
+      var: missing_dhparams
+      verbosity: 2
 
   - name: Assertions
     assert:
@@ -69,6 +87,11 @@
     dhparams:
       path: /etc/ssl/dhparams.pem
     register: existing_dhparams
+
+  - name: Debug
+    debug:
+      var: existing_dhparams
+      verbosity: 2
 
   - name: Assertions
     assert:
