@@ -36,6 +36,7 @@
       - collectd.major is number
       - collectd.minor is number
       - collectd.patch is number
+      - collectd.version is defined
 
   - name: Nginx facts
     nginx_facts:
