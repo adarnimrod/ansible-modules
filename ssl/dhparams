@@ -1,4 +1,5 @@
 #!/bin/sh -e
+# shellcheck disable=SC1090
 . "$1"
 
 fail ()
@@ -7,11 +8,12 @@ fail ()
     exit
 }
 
+# shellcheck disable=SC2154
 test -z "$path" && fail "Parameter 'path' is not set."
 test ! -r "$path" && fail "Can't access 'path'."
 test ! -f "$path" && fail "Parameter 'path' doesn't exists or is not a file."
 
-bits="$(openssl dhparam -in $path -text -noout \
+bits="$(openssl dhparam -in "$path" -text -noout \
     | sed -n 's/[a-zA-Z#0-9 \-]*Parameters: (\([0-9]*\) bit)/\1/p')"
 
 echo "{ \"changed\": false, \"path\": \"$path\", \"bits\": $bits }"

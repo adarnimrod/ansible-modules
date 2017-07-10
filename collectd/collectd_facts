@@ -1,4 +1,5 @@
 #!/bin/sh -e
+# shellcheck disable=SC1090
 . "$1"
 
 fail ()
@@ -7,6 +8,6 @@ fail ()
     exit
 }
 
-which collectd 2>&1 > /dev/null || fail "Can't find collectd executable."
+which collectd > /dev/null 2>&1 || fail "Can't find collectd executable."
 
 collectd -h 2>&1 | sed -n 's/[a-zA-Z ]*\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\).*/{"changed": false, "ansible_facts": {"collectd": {"major":\1, "minor":\2, "patch":\3, "version":"\1.\2.\3"}}}/p'

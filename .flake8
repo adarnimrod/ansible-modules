@@ -1,2 +1,0 @@
-[flake8]
-exclude = ldap/ldap_attr.py

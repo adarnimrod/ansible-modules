@@ -1,0 +1,23 @@
+---
+- name: APT install
+  apt:
+    name: collectd-core
+    state: latest
+    install_recommends: no
+
+- name: Collectd facts
+  collectd_facts:
+  register: collectd_facts
+
+- name: Debug
+  debug:
+    var: collectd_facts
+
+- name: Assertions
+  assert:
+    that:
+    - collectd_facts|changed == False
+    - collectd.major is number
+    - collectd.minor is number
+    - collectd.patch is number
+    - collectd.version is defined

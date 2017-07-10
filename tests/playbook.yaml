@@ -1,0 +1,54 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  become: False
+  tasks:
+      - name: Assertion
+        assert:
+            that:
+                - distro is defined
+                - release is defined
+
+      - name: Remove existing Docker container
+        # Use the command module instead of docker/ docker-container for
+        # consistency across different versions of Ansible.
+        command: 'docker rm -f ansible_modules_{{ distro }}_{{ release }}'
+        register: docker_rm
+        failed_when: "docker_rm|failed and 'no such container' not in docker_rm.stderr|lower"
+        changed_when: "'no such container' not in docker_rm.stderr|lower"
+
+      - name: Create Docker container
+        # Use the command module instead of docker/ docker-container for
+        # consistency across different versions of Ansible.
+        command: 'docker run --detach --name ansible_modules_{{ distro }}_{{ release }} {{ distro }}:{{ release }} tail -f /.dockerenv'
+        changed_when: True
+
+      - name: Add Docker container to inventory
+        add_host:
+            name: 'ansible_modules_{{ distro }}_{{ release }}'
+            ansible_connection: docker
+            ansible_user: root
+            groups: containers
+
+- hosts: containers
+  gather_facts: False
+  roles:
+      - name: debian-bootstrap
+  post_tasks:
+  - name: Include test tasks
+    with_fileglob: '{{ playbook_dir }}/*.yml'
+    include: '{{ item }}'
+
+- hosts: localhost
+  connection: local
+  become: False
+  gather_facts: False
+  tasks:
+      - name: Remove existing Docker container
+        # Use the command module instead of docker/ docker-container for
+        # consistency across different versions of Ansible.
+        command: 'docker rm -f ansible_modules_{{ distro }}_{{ release }}'
+        register: docker_rm
+        failed_when: "docker_rm|failed and 'no such container' not in docker_rm.stderr|lower"
+        changed_when: "'no such container' not in docker_rm.stderr|lower"

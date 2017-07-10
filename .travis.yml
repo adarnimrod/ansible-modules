@@ -1,28 +1,50 @@
 ---
 language: python
-python: "2.7"
+python:
+    - "2.7"
 dist: trusty
 sudo: false
-services: [docker]
+services:
+    - docker
+group: beta
 cache:
   - pip
   - directories:
       - $HOME/.pre-commit
 
 env:
-  - DOCKER=ubuntu:trusty
-  - DOCKER=ubuntu:xenial
-  - DOCKER=debian:jessie
+- TOXENV: pre-commit
+- TOXENV: ansible2.3.1.0-image_ubuntu_xenial
+- TOXENV: ansible2.3.1.0-image_ubuntu_trusty
+- TOXENV: ansible2.3.1.0-image_ubuntu_precise
+- TOXENV: ansible2.3.1.0-image_debian_stretch
+- TOXENV: ansible2.3.1.0-image_debian_jessie
+- TOXENV: ansible2.3.1.0-image_debian_wheezy
+- TOXENV: ansible2.2.3.0-image_ubuntu_xenial
+- TOXENV: ansible2.2.3.0-image_ubuntu_trusty
+- TOXENV: ansible2.2.3.0-image_ubuntu_precise
+- TOXENV: ansible2.2.3.0-image_debian_stretch
+- TOXENV: ansible2.2.3.0-image_debian_jessie
+- TOXENV: ansible2.2.3.0-image_debian_wheezy
+- TOXENV: ansible2.1.6.0-image_ubuntu_xenial
+- TOXENV: ansible2.1.6.0-image_ubuntu_trusty
+- TOXENV: ansible2.1.6.0-image_ubuntu_precise
+- TOXENV: ansible2.1.6.0-image_debian_stretch
+- TOXENV: ansible2.1.6.0-image_debian_jessie
+- TOXENV: ansible2.1.6.0-image_debian_wheezy
+- TOXENV: ansible2.0.2.0-image_ubuntu_xenial
+- TOXENV: ansible2.0.2.0-image_ubuntu_trusty
+- TOXENV: ansible2.0.2.0-image_ubuntu_precise
+- TOXENV: ansible2.0.2.0-image_debian_stretch
+- TOXENV: ansible2.0.2.0-image_debian_jessie
+- TOXENV: ansible2.0.2.0-image_debian_wheezy
 
 install:
-  - pip install pre_commit ansible | cat
-
-before_script:
-  - docker run --detach --name $(echo $DOCKER | sed 's/:/_/g') $DOCKER tail -f /.dockerenv
+  - pip install tox-travis | cat
 
 script:
-  - pre-commit run --all-files
-  - ansible-playbook -i $(echo $DOCKER | sed 's/:/_/g'), -c docker -vv playbook.yml
+  - tox
 
 notifications:
   email: false
+  on_failure: never

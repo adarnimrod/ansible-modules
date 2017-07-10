@@ -1,0 +1,23 @@
+---
+- name: APT install
+  apt:
+    name: nginx-light
+    state: latest
+    install_recommends: no
+
+- name: Nginx facts
+  nginx_facts:
+  register: nginx_facts
+
+- name: Debug
+  debug:
+    var: nginx_facts
+
+- name: Assertions
+  assert:
+    that:
+    - nginx_facts|changed == False
+    - nginx.major is number
+    - nginx.minor is number
+    - nginx.patch is number
+    - nginx.version is defined

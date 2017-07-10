@@ -35,6 +35,11 @@ Modules
 - nginx_facts
 - dhparams
 
+Usage
+-----
+
+See example usage in the test playbooks under :code:`tests/`.
+
 License
 -------
 
@@ -44,7 +49,12 @@ This software is licensed under the AGPL v3+ license (see the
 Testing
 -------
 
-Currently the only tests are `pre-commit <http://www.pre-commit.com/>`_ hooks.
+Modules are tested on Ubuntu Precise, Trusty and Xenial and Debian Wheezy,
+Jessie and Stretch with Ansible version 2.0.2.0, 2.1.6.0, 2.2.3.0 and 2.3.1.0
+in `TravisCI <https://travis-ci.org/adarnimrod/ansible-modules>`_. To tests
+require `Tox <https://tox.readthedocs.io/>`_ and `Docker
+<https://docker.com>`_. `Pre-commit <http://pre-commit.com/>`_ is also setup
+for this project.
 
 Author
 ------
