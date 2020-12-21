@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   connection: local
-  gather_facts: False
-  become: False
+  gather_facts: false
+  become: false
   tasks:
       - name: Assertion
         assert:
@@ -15,14 +15,20 @@
         # consistency across different versions of Ansible.
         command: 'docker rm -f ansible_modules_{{ distro }}_{{ release }}'
         register: docker_rm
-        failed_when: "docker_rm|failed and 'no such container' not in docker_rm.stderr|lower"
+        failed_when: |-
+          docker_rm|failed and 'no such container' not in docker_rm.stderr|lower
         changed_when: "'no such container' not in docker_rm.stderr|lower"
 
       - name: Create Docker container
         # Use the command module instead of docker/ docker-container for
         # consistency across different versions of Ansible.
-        command: 'docker run --detach --name ansible_modules_{{ distro }}_{{ release }} {{ distro }}:{{ release }} tail -f /.dockerenv'
-        changed_when: True
+        command: >-
+          docker run
+          --detach
+          --name ansible_modules_{{ distro }}_{{ release }}
+          {{ distro }}:{{ release }}
+          tail -f /.dockerenv
+        changed_when: true
 
       - name: Add Docker container to inventory
         add_host:
@@ -32,23 +38,24 @@
             groups: containers
 
 - hosts: containers
-  gather_facts: False
+  gather_facts: false
   roles:
       - name: debian-bootstrap
   post_tasks:
-  - name: Include test tasks
-    with_fileglob: '{{ playbook_dir }}/*.yml'
-    include: '{{ item }}'
+      - name: Include test tasks
+        with_fileglob: '{{ playbook_dir }}/*.yml'
+        include: '{{ item }}'
 
 - hosts: localhost
   connection: local
-  become: False
-  gather_facts: False
+  become: false
+  gather_facts: false
   tasks:
       - name: Remove existing Docker container
         # Use the command module instead of docker/ docker-container for
         # consistency across different versions of Ansible.
         command: 'docker rm -f ansible_modules_{{ distro }}_{{ release }}'
         register: docker_rm
-        failed_when: "docker_rm|failed and 'no such container' not in docker_rm.stderr|lower"
+        failed_when: |-
+          docker_rm|failed and 'no such container' not in docker_rm.stderr|lower
         changed_when: "'no such container' not in docker_rm.stderr|lower"

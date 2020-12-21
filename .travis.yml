@@ -8,43 +8,43 @@ services:
     - docker
 group: beta
 cache:
-  - pip
-  - directories:
-      - $HOME/.pre-commit
+    - pip
+    - directories:
+          - $HOME/.pre-commit
 
 env:
-- TOXENV: pre-commit
-- TOXENV: ansible2.3.1.0-image_ubuntu_xenial
-- TOXENV: ansible2.3.1.0-image_ubuntu_trusty
-- TOXENV: ansible2.3.1.0-image_ubuntu_precise
-- TOXENV: ansible2.3.1.0-image_debian_stretch
-- TOXENV: ansible2.3.1.0-image_debian_jessie
-- TOXENV: ansible2.3.1.0-image_debian_wheezy
-- TOXENV: ansible2.2.3.0-image_ubuntu_xenial
-- TOXENV: ansible2.2.3.0-image_ubuntu_trusty
-- TOXENV: ansible2.2.3.0-image_ubuntu_precise
-- TOXENV: ansible2.2.3.0-image_debian_stretch
-- TOXENV: ansible2.2.3.0-image_debian_jessie
-- TOXENV: ansible2.2.3.0-image_debian_wheezy
-- TOXENV: ansible2.1.6.0-image_ubuntu_xenial
-- TOXENV: ansible2.1.6.0-image_ubuntu_trusty
-- TOXENV: ansible2.1.6.0-image_ubuntu_precise
-- TOXENV: ansible2.1.6.0-image_debian_stretch
-- TOXENV: ansible2.1.6.0-image_debian_jessie
-- TOXENV: ansible2.1.6.0-image_debian_wheezy
-- TOXENV: ansible2.0.2.0-image_ubuntu_xenial
-- TOXENV: ansible2.0.2.0-image_ubuntu_trusty
-- TOXENV: ansible2.0.2.0-image_ubuntu_precise
-- TOXENV: ansible2.0.2.0-image_debian_stretch
-- TOXENV: ansible2.0.2.0-image_debian_jessie
-- TOXENV: ansible2.0.2.0-image_debian_wheezy
+    - TOXENV: pre-commit
+    - TOXENV: ansible2.3.1.0-image_ubuntu_xenial
+    - TOXENV: ansible2.3.1.0-image_ubuntu_trusty
+    - TOXENV: ansible2.3.1.0-image_ubuntu_precise
+    - TOXENV: ansible2.3.1.0-image_debian_stretch
+    - TOXENV: ansible2.3.1.0-image_debian_jessie
+    - TOXENV: ansible2.3.1.0-image_debian_wheezy
+    - TOXENV: ansible2.2.3.0-image_ubuntu_xenial
+    - TOXENV: ansible2.2.3.0-image_ubuntu_trusty
+    - TOXENV: ansible2.2.3.0-image_ubuntu_precise
+    - TOXENV: ansible2.2.3.0-image_debian_stretch
+    - TOXENV: ansible2.2.3.0-image_debian_jessie
+    - TOXENV: ansible2.2.3.0-image_debian_wheezy
+    - TOXENV: ansible2.1.6.0-image_ubuntu_xenial
+    - TOXENV: ansible2.1.6.0-image_ubuntu_trusty
+    - TOXENV: ansible2.1.6.0-image_ubuntu_precise
+    - TOXENV: ansible2.1.6.0-image_debian_stretch
+    - TOXENV: ansible2.1.6.0-image_debian_jessie
+    - TOXENV: ansible2.1.6.0-image_debian_wheezy
+    - TOXENV: ansible2.0.2.0-image_ubuntu_xenial
+    - TOXENV: ansible2.0.2.0-image_ubuntu_trusty
+    - TOXENV: ansible2.0.2.0-image_ubuntu_precise
+    - TOXENV: ansible2.0.2.0-image_debian_stretch
+    - TOXENV: ansible2.0.2.0-image_debian_jessie
+    - TOXENV: ansible2.0.2.0-image_debian_wheezy
 
 install:
-  - pip install tox-travis | cat
+    - pip install tox-travis | cat
 
 script:
-  - tox
+    - tox
 
 notifications:
-  email: false
-  on_failure: never
+    email: false
+    on_failure: never

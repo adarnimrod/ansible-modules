@@ -3,7 +3,7 @@
   apt:
     name: collectd-core
     state: latest
-    install_recommends: no
+    install_recommends: false
 
 - name: Collectd facts
   collectd_facts:
@@ -16,8 +16,8 @@
 - name: Assertions
   assert:
     that:
-    - collectd_facts|changed == False
-    - collectd.major is number
-    - collectd.minor is number
-    - collectd.patch is number
-    - collectd.version is defined
+      - collectd_facts|changed == false
+      - collectd.major is number
+      - collectd.minor is number
+      - collectd.patch is number
+      - collectd.version is defined

@@ -1,10 +1,15 @@
 ansible-modules
 ###############
 
-.. image:: https://travis-ci.org/adarnimrod/ansible-modules.svg?branch=master
-    :target: https://travis-ci.org/adarnimrod/ansible-modules
+.. image:: https://git.shore.co.il/ansible/ansible-modules/badges/master/pipeline.svg
+    :target: https://git.shore.co.il/ansible/ansible-modules/-/commits/master
+    :alt: pipeline status
 
 A repository of Ansible modules.
+
+This project is deprecated. All of the modules in this repo have equivalents in
+the Ansible project making them obsolete. Right now the only tests that are done
+are linters with pre-commit.
 
 Installation
 ------------
@@ -30,10 +35,10 @@ Remember to commit :code:`.gitmodules`!
 Modules
 -------
 
-- collectd_facts
-- ldap_attr
-- nginx_facts
-- dhparams
+- collectd_facts (use the :code:`package_facts` module instead)
+- ldap_attr (has been accepted in to the Ansible project)
+- nginx_facts (use the :code:`package_facts` module instead)
+- dhparams (use the :code:`openssl_dhparams` module instead)
 
 Usage
 -----
@@ -50,11 +55,10 @@ Testing
 -------
 
 Modules are tested on Ubuntu Precise, Trusty and Xenial and Debian Wheezy,
-Jessie and Stretch with Ansible version 2.0.2.0, 2.1.6.0, 2.2.3.0 and 2.3.1.0
-in `TravisCI <https://travis-ci.org/adarnimrod/ansible-modules>`_. To tests
-require `Tox <https://tox.readthedocs.io/>`_ and `Docker
-<https://docker.com>`_. `Pre-commit <http://pre-commit.com/>`_ is also setup
-for this project.
+Jessie and Stretch with Ansible version 2.0.2.0, 2.1.6.0, 2.2.3.0 and 2.3.1.0.
+The tests require `Tox <https://tox.readthedocs.io/>`_ and `Docker
+<https://docker.com>`_. `Pre-commit <http://pre-commit.com/>`_ is also setup for
+this project.
 
 Author
 ------
@@ -62,7 +66,7 @@ Author
 Nimrod Adar, `contact me <nimrod@shore.co.il>`_ or visit my `website
 <https://www.shore.co.il/>`_. Patches are welcome via `git send-email
 <http://git-scm.com/book/en/v2/Git-Commands-Email>`_. The repository is located
-at: https://www.shore.co.il/git/.
+at: https://git.shore.co.il/explore/.
 
 TODO
 ----

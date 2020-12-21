@@ -3,10 +3,10 @@
   apt:
     name: openssl
     state: latest
-    install_recommends: no
+    install_recommends: false
 
 - name: DH params for missing file
-  ignore_errors: True
+  ignore_errors: frue
   dhparams:
     path: /etc/ssl/dhparams.pem
   register: missing_dhparams
@@ -18,13 +18,13 @@
 - name: Assertions
   assert:
     that:
-    - missing_dhparams.bits == 0
-    - missing_dhparams|failed == True
-    - missing_dhparams|changed == False
+      - missing_dhparams.bits == 0
+      - missing_dhparams|failed == true
+      - missing_dhparams|changed == false
 
 - name: Generate DH params
   command: openssl dhparam -out /etc/ssl/dhparams.pem 2048
-  changed_when: True
+  changed_when: true
 
 - name: DH params for existing file
   dhparams:
@@ -38,7 +38,7 @@
 - name: Assertions
   assert:
     that:
-    - existing_dhparams.bits == 2048
-    - existing_dhparams|failed == False
-    - existing_dhparams|changed == False
-    - existing_dhparams.path == '/etc/ssl/dhparams.pem'
+      - existing_dhparams.bits == 2048
+      - existing_dhparams|failed == false
+      - existing_dhparams|changed == false
+      - existing_dhparams.path == '/etc/ssl/dhparams.pem'

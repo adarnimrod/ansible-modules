@@ -3,7 +3,7 @@
   apt:
     name: nginx-light
     state: latest
-    install_recommends: no
+    install_recommends: false
 
 - name: Nginx facts
   nginx_facts:
@@ -16,8 +16,8 @@
 - name: Assertions
   assert:
     that:
-    - nginx_facts|changed == False
-    - nginx.major is number
-    - nginx.minor is number
-    - nginx.patch is number
-    - nginx.version is defined
+      - nginx_facts|changed == false
+      - nginx.major is number
+      - nginx.minor is number
+      - nginx.patch is number
+      - nginx.version is defined

@@ -1,0 +1,19 @@
+---
+image: adarnimrod/ci-images:docker
+
+stages:
+  - lint
+
+pre-commit:
+  stage: lint
+  image: adarnimrod/ci-images:pre-commit
+  variables:
+    XDG_CACHE_HOME: "$CI_PROJECT_DIR/.cache"
+  before_script:
+    # yamllint disable-line rule:line-length
+    - git clone https://git.shore.co.il/ansible/debian-bootstrap.git tests/roles/debian-bootstrap
+  script:
+    - pre-commit run --all-files
+  cache:
+    paths:
+      - .cache/
